@@ -1,78 +1,68 @@
 import React from 'react'
 import { Switch, Route, Link } from "react-router-dom"
-import Start from './start/Start'
-import Guitars from './guitars/Guitars'
-import Thecompany from './thecompany/Thecompany'
-import Customshop from './customshop/Customshop'
-import Dealers from './dealers/Dealers'
-import Musicians from './musicians/Musicians'
-import Helpcenter from './helpcenter/Helpcenter'
-import Downloads from './downloads/Downloads'
-import Contact from './contact/Contact'
+import Start from './Start'
+import Guitars from './Guitars'
+import Thecompany from './Thecompany'
+import Musicians from './Musicians'
+import Helpcenter from './Helpcenter'
+import Downloads from './Downloads'
+import Contact from './Contact'
+
+const navItems = [
+    {
+        path: '/start',
+        component: <Start />,
+        name: 'Start'
+    }, {
+        path: '/guitars',
+        component: <Guitars />,
+        name: 'Guitars'
+    }, {
+        path: '/thecompany',
+        component: <Thecompany />,
+        name: 'The Company'
+    }, {
+        path: '/musicians',
+        component: <Musicians />,
+        name: 'Musicians'
+    }, {
+        path: '/helpcenter',
+        component: <Helpcenter />,
+        name: 'Help Center'
+    }, {
+        path: '/downloads',
+        component: <Downloads />,
+        name: 'Downloads'
+    }, {
+        path: '/contact',
+        component: <Contact />,
+        name: 'Contacts'
+    }
+]
 
 const customnav = () => {
     return (
         <div>
             <nav>
                 <ul>
-                    <li>
-                        <Link to="/start">Start</Link>
-                    </li>
-                    <li>
-                        <Link to="/guitars">Guitars</Link>
-                    </li>
-                    <li>
-                        <Link to="/thecompany">The Company</Link>
-                    </li>
-                    <li>
-                        <Link to="/customshop">Customshop</Link>
-                    </li>
-                    <li>
-                        <Link to="dealers">Dealers</Link>
-                    </li>
-                    <li>
-                        <Link to="/musicians">Musicians</Link>
-                    </li>
-                    <li>
-                        <Link to="/helpcenter">Help Center</Link>
-                    </li>
-                    <li>
-                        <Link to="/downloads">Downloads</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact">Contact</Link>
-                    </li>
+                    {
+                        navItems.map((item, index) => (
+                            <li key={index}>
+                                <Link to={item.path}>{item.name}</Link>
+                            </li>
+                        ))
+                    }
                 </ul>
             </nav>
 
             <Switch>
-                <Route path="/start">
-                    <Start />
-                </Route>
-                <Route path="/guitars">
-                    <Guitars />
-                </Route>
-                <Route path="/thecompany">
-                    <Thecompany />
-                </Route>
-                <Route path="/customshop">
-                    <Customshop />
-                </Route>
-                <Route path="/dealers">
-                    <Dealers />
-                </Route>
-                <Route path="/musicians">
-                    <Musicians />
-                </Route>
-                <Route path="/helpcenter">
-                    <Helpcenter />
-                </Route>
-                <Route path="/downloads">
-                    <Downloads />
-                </Route>
-                <Route path="/contact">
-                    <Contact />
-                </Route>
+                {
+                    navItems.map((item, index) => (
+                        <Route path={item.path} key={index}>
+                            {item.component}
+                        </Route>
+                    ))
+                }
             </Switch>
         </div>
     )
